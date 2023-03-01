@@ -89,17 +89,25 @@ function buy(id) {
     console.log(cartList);
     document.getElementById("count_product").innerHTML = cartList.length;
   }
+
+  console.log(calculateTotal());
 }
 
 // Exercise 2
 function cleanCart() {
   cartList.length = 0;
+  document.getElementById("count_product").innerHTML = cartList.length;
   console.log(cartList);
 }
 
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
+  let totalPrice = 0;
+  for (let i = 0; i < cartList.length; i++) {
+    totalPrice += cartList[i].price;
+  }
+  return totalPrice;
 }
 
 // Exercise 4
