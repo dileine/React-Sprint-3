@@ -78,7 +78,7 @@ function buy(id) {
   for (let i = 0; i < products.length; i++) {
     if (products[i].id === id) {
       productAdd = products[i];
-      console.log(productAdd);
+      console.log(productAdd.name);
       break;
     }
   }
@@ -86,12 +86,16 @@ function buy(id) {
   if (productAdd) {
     cartList.push(productAdd);
     console.log(productAdd.name + " has been added to the cart");
+    console.log(cartList);
     document.getElementById("count_product").innerHTML = cartList.length;
   }
 }
 
 // Exercise 2
-function cleanCart() {}
+function cleanCart() {
+  cartList.length = 0;
+  console.log(cartList);
+}
 
 // Exercise 3
 function calculateTotal() {
