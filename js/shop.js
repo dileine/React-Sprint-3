@@ -20,7 +20,7 @@ function buy(id) {
   // 2. Add found product to the cartList array
   if (productAdd) {
     cartList.push(productAdd);
-    console.log(productAdd.name + " has been added to the cart");
+    console.log(productAdd.name + " has been added to cartList");
     console.log(cartList);
     document.getElementById("count_product").innerHTML = cartList.length;
   }
@@ -38,11 +38,11 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
-  let totalPrice = 0;
+  total = 0;
   for (let i = 0; i < cartList.length; i++) {
-    totalPrice += cartList[i].price;
+    total += cartList[i].price;
   }
-  return totalPrice;
+  return total.toFixed(2);
 }
 
 // Exercise 4
@@ -50,6 +50,7 @@ function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
   cart = [];
+
   for (let i = 0; i < cartList.length; i++) {
     if (!cart.includes(cartList[i])) {
       cartList[i].quantity = 1;
@@ -60,8 +61,8 @@ function generateCart() {
       cartList[i].quantity += 1;
       cartList[i].subtotal = cartList[i].quantity * cartList[i].price;
     }
-    applyPromotionsCart();
   }
+  applyPromotionsCart();
 }
 
 // Exercise 5
@@ -75,7 +76,7 @@ function applyPromotionsCart() {
       cart[i].subtotalWithDiscount = (cart[i].price * 2) / 3;
       cart.push(cart[i].subtotalWithDiscount);
     } else {
-      cart[i].subtotalWithDiscount = "";
+      cart[i].subtotalWithDiscount = cart[i].subtotal;
     }
   }
 }
@@ -83,6 +84,41 @@ function applyPromotionsCart() {
 // Exercise 6
 function printCart() {
   // Fill the shopping cart modal manipulating the shopping cart dom
+  generateCart();
+  const cartTable = document.querySelector("#cart_list");
+
+  let cartTotal = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    const element = cart[i];
+    cartTotal += element.subtotalWithDiscount;
+
+    const table = document.createElement("tr");
+
+    const tableProduct = document.createElement("th");
+    tableProduct.textContent = element.name;
+
+    const tablePrice = document.createElement("td");
+    tablePrice.textContent = element.price;
+
+    const tableQty = document.createElement("td");
+    tableQty.textContent = element.quantity;
+
+    const tableSubtotal = document.createElement("td");
+    tableSubtotal.textContent = element.subtotal.toFixed(2);
+
+    const tableSubTotalDiscount = document.createElement("td");
+    tableSubTotalDiscount.textContent = element.subtotalWithDiscount.toFixed(2);
+
+    document.getElementById("total_price").innerHTML = cartTotal.toFixed(2);
+
+    cartTable.appendChild(table);
+    table.appendChild(tableProduct);
+    table.appendChild(tablePrice);
+    table.appendChild(tableQty);
+    table.appendChild(tableSubtotal);
+    table.appendChild(tableSubTotalDiscount);
+  }
 }
 
 // ** Nivell II **
