@@ -16,6 +16,7 @@ function validate(event) {
   const letters = /^[a-zA-Z]+$/;
   const validPassword = /^(?=.*?\d)(?=.*?[a-zA-Z])[a-zA-Z\d]+$/;
   const validEmail = /\S+@\S+\.\S+/;
+  const numbers = /^\d+$/;
 
   // Validate fields entered by the user: name, phone, password, and email
   if (fName.value.length < 3 || !letters.test(fName.value)) {
@@ -53,7 +54,7 @@ function validate(event) {
     fPassword.classList.remove("is-invalid");
   }
 
-  if (fPhone.value.length < 3) {
+  if (fPhone.value.length < 3 || !numbers.test(fPhone.value)) {
     fPhone.classList.add("is-invalid");
     error++;
   } else {
