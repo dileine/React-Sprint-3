@@ -1,28 +1,63 @@
-
 // Exercise 6
-function validate() {
-	var error = 0;
-	// Get the input fields
-	var fName = document.getElementById("fName");
-	var fEmail = document.getElementById("fEmail");
+function validate(event) {
+  let error = 0;
 
-	// Get the error elements
-	var errorName = document.getElementById("errorName");
-	var errorEmail = document.getElementById("errorEmail");  
-	
-	// Validate fields entered by the user: name, phone, password, and email
-	if(fName.value == ""){
-		error++;
-	}
+  event.preventDefault();
 
-	if(fEmail.value == ""){
-		error++;
-	}
-	 
-	if(error>0){
-		alert("Error");
-	}else{
-		alert("OK");
-	}
+  // Get the input fields
+  let fName = document.getElementById("fName");
+  let fEmail = document.getElementById("fEmail");
+  let fAddress = document.getElementById("fAddress");
+  let fLastN = document.getElementById("fLastN");
+  let fPassword = document.getElementById("fPassword");
+  let fPhone = document.getElementById("fPhone");
 
+  // Validate fields entered by the user: name, phone, password, and email
+  if (fName.value.length < 3) {
+    fName.classList.add("is-invalid");
+    error++;
+  } else {
+    fName.classList.remove("is-invalid");
+  }
+
+  if (fEmail.value.length < 3) {
+    fEmail.classList.add("is-invalid");
+    error++;
+  } else {
+    fEmail.classList.remove("is-invalid");
+  }
+
+  if (fAddress.value.length < 3) {
+    fAddress.classList.add("is-invalid");
+    error++;
+  } else {
+    fAddress.classList.remove("is-invalid");
+  }
+
+  if (fLastN.value.length < 3) {
+    fLastN.classList.add("is-invalid");
+    error++;
+  } else {
+    fLastN.classList.remove("is-invalid");
+  }
+
+  if (fPassword.value.length < 3) {
+    fPassword.classList.add("is-invalid");
+    error++;
+  } else {
+    fPassword.classList.remove("is-invalid");
+  }
+
+  if (fPhone.value.length < 3) {
+    fPhone.classList.add("is-invalid");
+    error++;
+  } else {
+    fPhone.classList.remove("is-invalid");
+  }
+
+  if (error > 0) {
+    alert("There are items that requires your attention");
+  } else {
+    alert("Looks good!");
+  }
 }
