@@ -33,16 +33,16 @@ function cleanCart() {
   cartList = [];
   document.querySelector("#cart_list").innerHTML = "";
   document.getElementById("total_price").innerHTML = "";
-  document.getElementById("count_product").innerHTML = cartList.length;
-  console.log(cartList);
+  document.getElementById("count_product").innerHTML = cart.length;
+  console.log(cart);
 }
 
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
   total = 0;
-  for (let i = 0; i < cartList.length; i++) {
-    total += cartList[i].price;
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price;
   }
   return total.toFixed(2);
 }
@@ -113,6 +113,18 @@ function printCart() {
     const tableSubTotalDiscount = document.createElement("td");
     tableSubTotalDiscount.textContent = element.subtotalWithDiscount.toFixed(2);
 
+    const addItem = document.createElement("td");
+    addItem.innerHTML =
+      '<button class="btn btn-outline-dark" onclick="addToCart(' +
+      element.id +
+      ')"><i class="fa fa-plus"></button>';
+
+    const removeItem = document.createElement("td");
+    removeItem.innerHTML =
+      '<button class="btn btn-outline-dark" onclick="removeFromCart(' +
+      element.id +
+      ')"><i class="fa fa-minus"></button>';
+
     document.getElementById("total_price").innerHTML = cartTotal.toFixed(2);
 
     cartTable.appendChild(table);
@@ -121,6 +133,8 @@ function printCart() {
     table.appendChild(tableQty);
     table.appendChild(tableSubtotal);
     table.appendChild(tableSubTotalDiscount);
+    table.appendChild(addItem);
+    table.appendChild(removeItem);
   }
 }
 
@@ -137,29 +151,57 @@ function addToCart(id) {
       break;
     }
   }
-  if (productAdd) {
-    cartList.push(productAdd);
-    document.getElementById("count_product").innerHTML = cartList.length;
-  }
+
   // 2. Add found product to the cart array or update its quantity in case it has been added previously.
-  cart = [];
-  for (let i = 0; i < cartList.length; i++) {
-    if (!cart.includes(cartList[i])) {
-      cartList[i].quantity = 1;
-      cartList[i].subtotal = cartList[i].quantity * cartList[i].price;
-      cart.push(cartList[i]);
+  if (productAdd) {
+    let productIndex = cart.findIndex((item) => item.id === productAdd.id);
+    if (productIndex === -1) {
+      productAdd.quantity = 1;
+      productAdd.subtotal = productAdd.quantity * productAdd.price;
+      cart.push(productAdd);
     } else {
-      cartList[i].quantity += 1;
-      cartList[i].subtotal = cartList[i].quantity * cartList[i].price;
+      cart[productIndex].quantity += 1;
+      cart[productIndex].subtotal =
+        cart[productIndex].quantity * cart[productIndex].price;
     }
-    applyPromotionsCart();
+    const totalQuantity = cart.reduce(
+      (total, product) => total + product.quantity,
+      0
+    );
+
+    document.getElementById("count_product").innerHTML = totalQuantity;
   }
-  console.log(cart, cartList);
+  calculateTotal();
+  applyPromotionsCart();
+  printCart();
+  console.log(cart);
 }
 
 // Exercise 9
 function removeFromCart(id) {
-  //find de index of the product in array cart
+  // find de index of the product in array cart
+  const indexCart = cart.findIndex((item) => item.id === id);
+
+  // eliminate or update quantity
+  if (cart[indexCart].quantity == 1) {
+    cart.splice(indexCart, 1); // remove from the cart
+    console.log(cart);
+  } else {
+    cart[indexCart].quantity -= 1;
+    cart[indexCart].subtotal = cart[indexCart].quantity * cart[indexCart].price;
+  }
+  const totalQuantity = cart.reduce(
+    (total, product) => total + product.quantity,
+    0
+  );
+  document.getElementById("count_product").innerHTML = totalQuantity;
+  total = cart.reduce((sum, product) => sum + product.subtotal, 0);
+  document.getElementById("total_price").innerHTML = total;
+  calculateTotal();
+  applyPromotionsCart();
+  printCart();
+
+  console.log(cart);
 }
 
 function open_modal() {
