@@ -1,5 +1,7 @@
 # Sprint 3 IT Academy | Shop
 
+[Deployment](https://dileine.github.io/React-Sprint-3/)
+
 ## Introduction
 
 A company in the e-commerce sector has asked us for a web application that allows them to offer the purchase of their products through the internet.
@@ -10,21 +12,21 @@ You will be in charge of setting up an initial demo version of the application f
 
 ## Requirements
 
-
 1. Clone this repo
+
 ```bash
 $ git clone https://github.com/IT-Academy-BCN/starter-code-frontend-sprint-3
 ```
 
 2. Unlink your repo from the itacademy repository.
-(Explanation: You have to upload the code to your GitHub repository, not to the IT Academy. That's why you have to unlink your project from IT Academy GitHub with the following command)
+   (Explanation: You have to upload the code to your GitHub repository, not to the IT Academy. That's why you have to unlink your project from IT Academy GitHub with the following command)
 
 ```bash
 $ git remote rm origin
 ```
 
 3. Link your repo to the repository you have to create in your github account
-(Explanation: Now your project is not linked to any remote repository. In order to upload your code, you have to link your project to the new repository created on github.com using the following command)
+   (Explanation: Now your project is not linked to any remote repository. In order to upload your code, you have to link your project to the new repository created on github.com using the following command)
 
 ```bash
 $ git remote add origin <your repo name!>
@@ -44,8 +46,6 @@ $ git push origin master
 
 2. Upload the link to the virtual campus so that your mentor can correct it and give you feedback.
 
-
-
 <br>
 
 ## Introduction
@@ -53,7 +53,6 @@ $ git push origin master
 The statement of the exercise is available on the virtual campus.
 
 <br>
-
 
 ## Instructions
 
